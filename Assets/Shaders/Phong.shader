@@ -17,6 +17,9 @@
 		_directionalLightColor("Directional light Color",Color) = (0,0,0,1)
 		_directionalLightIntensity("Directional light Intensity",Float) = 1
 
+		_fresnelIntensity("Fresnel intensity", Range(0,1)) = 0.5
+		_roughness("Roughness", Range(0,1)) = 0.5
+
     }
     SubShader
     {
@@ -73,6 +76,9 @@
 			float4 _directionalLightColor;
 			float _directionalLightIntensity;
 
+			float _fresnelIntensity;
+			float _roughness;
+
             fixed4 frag (v2f i) : SV_Target
             {
 				
@@ -82,10 +88,15 @@
 				fixed4 ambientComp = _ambientColor * _ambientInt;//We calculate the ambient term based on intensity
 				fixed4 finalColor = ambientComp;
 				
+				float PI = 3.1415926;
 				float3 viewVec;
 				float3 halfVec;
 				float3 difuseComp = float4(0, 0, 0, 1);
 				float3 specularComp = float4(0, 0, 0, 1);
+				float3 fresnel = float4(0, 0, 0, 1);
+				float3 distribution = float4(0, 0, 0, 1);
+				float3 geometry = float4(0, 0, 0, 1);
+				float3 brdfComp = float4(0, 0, 0, 1);;
 				float3 lightColor;
 				float3 lightDir;
 #if DIRECTIONAL_LIGHT_ON
@@ -96,7 +107,7 @@
 
 				//Diffuse componenet
 				difuseComp = lightColor * _diffuseInt * clamp(dot(lightDir, i.worldNormal),0,1);
-
+				
 				//Specular component	
 				viewVec = normalize(_WorldSpaceCameraPos - i.wPos);
 
@@ -107,10 +118,21 @@
 				
 				//blinnPhong
 				halfVec = normalize(viewVec + lightDir);
-				specularComp = lightColor * pow(max(dot(halfVec, i.worldNormal),0), _scecularExp);
+				//specularComp = lightColor * pow(max(dot(halfVec, i.worldNormal),0), _scecularExp);
 
-				//Sum
-				finalColor += clamp(float4(_directionalLightIntensity*(difuseComp+specularComp),1),0,1);
+				// Fresnel Schlick
+				fresnel = pow(_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir))),5);
+				
+				// Distribution Blinn
+				distribution = (pow(((1 / (PI * _roughness)) * (dot(i.worldNormal, halfVec))), (2 /  (pow(_roughness, 2) ) ) - 2));
+				return distribution.xyzx;
+				// Geometry Implicit
+				geometry = (dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec));
+				
+				brdfComp = (fresnel * geometry * distribution) / (4 * ( (dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec))));
+				
+				//finalColor += clamp(float4(_directionalLightIntensity*(difuseComp+fresnel),1),0,1);
+				finalColor += clamp(float4(_pointLightIntensity * (difuseComp + brdfComp), 1), 0, 1);
 #endif
 #if POINT_LIGHT_ON
 				//Point light properties
@@ -130,14 +152,23 @@
 				//phong
 				//float3 halfVec = reflect(-lightDir, i.worldNormal);
 				//fixed4 specularComp = lightColor * pow(clamp(dot(halfVec, viewVec),0,1), _scecularExp);
-
+				
 				//blinnPhong
 				halfVec = normalize(viewVec + lightDir);
-				specularComp = lightColor * pow(max(dot(halfVec, i.worldNormal), 0), _scecularExp) / lightDist;
-
-				//Sum
-				finalColor += clamp(float4(_pointLightIntensity*(difuseComp + specularComp),1),0,1);
+				//specularComp = lightColor * pow(max(dot(halfVec, i.worldNormal), 0), _scecularExp) / lightDist;
 				
+				// Fresnel Schlick
+				fresnel = pow((_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir)))), 5);
+				// Distribution Blinn
+				distribution = pow( ( ( 1 / (PI * _roughness)) * (dot(i.worldNormal, halfVec)) ), ((2 / ( (pow(_roughness, 2) - 2) ) )));
+				// Geometry Implicit
+				geometry = (dot(i.worldNormal,lightDir)) * (dot(i.worldNormal, viewVec));
+				
+				// BRDF Function
+				brdfComp = (fresnel * geometry * distribution) / 4 * ((dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec))) / lightDist;
+				
+				//finalColor += clamp(float4(_pointLightIntensity*(difuseComp + fresnel),1),0,1);
+				finalColor += clamp(float4(_pointLightIntensity * (difuseComp + brdfComp),1), 0, 1);
 				
 #endif
 				//pointLight
