@@ -124,8 +124,11 @@
 				fresnel = pow(_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir))),5);
 				
 				// Distribution Blinn
-				distribution = (pow(((1 / (PI * _roughness)) * (dot(i.worldNormal, halfVec))), (2 /  (pow(_roughness, 2) ) ) - 2));
-				return distribution.xyzx;
+				//distribution = (pow( (1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)  ) - 2));
+
+				//Distribution GGX
+				distribution = pow(_roughness, 2) / pow((PI * pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)), 2);
+				//return distribution.xyzx;
 				// Geometry Implicit
 				geometry = (dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec));
 				
@@ -160,7 +163,11 @@
 				// Fresnel Schlick
 				fresnel = pow((_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir)))), 5);
 				// Distribution Blinn
-				distribution = pow( ( ( 1 / (PI * _roughness)) * (dot(i.worldNormal, halfVec)) ), ((2 / ( (pow(_roughness, 2) - 2) ) )));
+				//distribution = (pow((1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)) - 2));
+
+				//Distribution GGX
+				distribution = pow(_roughness, 2) / pow((PI * pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)), 2);
+				//return distribution.xyzx;
 				// Geometry Implicit
 				geometry = (dot(i.worldNormal,lightDir)) * (dot(i.worldNormal, viewVec));
 				
