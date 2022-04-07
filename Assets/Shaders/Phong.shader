@@ -19,6 +19,7 @@
 
 		_fresnelIntensity("Fresnel intensity", Range(0,1)) = 0.5
 		_roughness("Roughness", Range(0,1)) = 0.5
+		_geometry("Geometry", Range(0,1)) = 0.5
 
     }
     SubShader
@@ -78,6 +79,7 @@
 
 			float _fresnelIntensity;
 			float _roughness;
+			float _geometry;
 
             fixed4 frag (v2f i) : SV_Target
             {
@@ -122,16 +124,21 @@
 
 				// Fresnel Schlick
 				fresnel = pow(_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir))),5);
-				
+				return fresnel.xyzx;
+
 				// Distribution Blinn
 				//distribution = (pow( (1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)  ) - 2));
 
 				//Distribution GGX
-				distribution = pow(_roughness, 2) / pow((PI * pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)), 2);
+				distribution = (pow(_roughness, 2)) / (PI * (pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)));
 				//return distribution.xyzx;
 				// Geometry Implicit
 				geometry = (dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec));
-				
+
+				//Geometry GGX
+				//geometry = (2 * (dot(normalize(i.worldNormal), viewVec))) / ((dot(normalize(i.worldNormal), viewVec)) + sqrt((pow(_geometry, 2)) + (1 - (pow(_geometry, 2))) * (pow((dot(normalize(i.worldNormal), viewVec)), 2))));
+				//return geometry.xyzx;
+
 				brdfComp = (fresnel * geometry * distribution) / (4 * ( (dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec))));
 				
 				//finalColor += clamp(float4(_directionalLightIntensity*(difuseComp+fresnel),1),0,1);
@@ -162,15 +169,21 @@
 				
 				// Fresnel Schlick
 				fresnel = pow((_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir)))), 5);
+				return fresnel.xyzx;
+
 				// Distribution Blinn
 				//distribution = (pow((1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)) - 2));
 
 				//Distribution GGX
-				distribution = pow(_roughness, 2) / pow((PI * pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)), 2);
+				distribution = (pow(_roughness, 2)) / (PI * (pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)));
 				//return distribution.xyzx;
 				// Geometry Implicit
 				geometry = (dot(i.worldNormal,lightDir)) * (dot(i.worldNormal, viewVec));
-				
+
+				//Geometry GGX
+				//geometry = (2 * (dot(normalize(i.worldNormal), viewVec))) / ((dot(normalize(i.worldNormal), viewVec)) + sqrt((pow(_geometry, 2)) + (1 - (pow(_geometry, 2))) * (pow((dot(normalize(i.worldNormal), viewVec)), 2))));
+				//return geometry.xyzx;
+
 				// BRDF Function
 				brdfComp = (fresnel * geometry * distribution) / 4 * ((dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec))) / lightDist;
 				
