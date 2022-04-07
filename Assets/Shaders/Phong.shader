@@ -124,7 +124,7 @@
 
 				// Fresnel Schlick
 				fresnel = pow(_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir))),5);
-				return fresnel.xyzx;
+				//return fresnel.xyzx;
 
 				// Distribution Blinn
 				//distribution = (pow( (1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)  ) - 2));
@@ -169,7 +169,7 @@
 				
 				// Fresnel Schlick
 				fresnel = pow((_fresnelIntensity + ((1 - _fresnelIntensity) * (1 - dot(halfVec, lightDir)))), 5);
-				return fresnel.xyzx;
+				//return fresnel.xyzx;
 
 				// Distribution Blinn
 				//distribution = (pow((1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)) - 2));
