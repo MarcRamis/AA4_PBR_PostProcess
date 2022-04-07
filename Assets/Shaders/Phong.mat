@@ -76,8 +76,9 @@ Material:
     - _diffuseInt: 1
     - _directionalLightIntensity: 1
     - _fresnelIntensity: 1
+    - _geometry: 1
     - _pointLightIntensity: 1
-    - _roughness: 0
+    - _roughness: 0.042
     - _scecularExp: 64
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
@@ -86,7 +87,7 @@ Material:
     - _cameraPos: {r: 1.1100433, g: 1.4522374, b: -5.1509676, a: 1}
     - _directionaLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _directionalLightColor: {r: 1, g: 0.5174944, b: 0, a: 1}
-    - _directionalLightDir: {r: 0.82268894, g: 0.5232467, b: 0.22225142, a: 0}
+    - _directionalLightDir: {r: 0.6567128, g: 0.64399076, b: -0.39243397, a: 0}
     - _objectColor: {r: 1, g: 1, b: 1, a: 1}
     - _pointLightColor: {r: 0.1577994, g: 0.0800997, b: 0.9433962, a: 0}
     - _pointLightPos: {r: 0.84, g: 2.17, b: -4.71, a: 0}
