@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sharedProfile: {fileID: 11400000, guid: 57a71fe79d3bf724896651b3b12869ee, type: 2}
   isGlobal: 0
-  blendDistance: 0.27
+  blendDistance: 0.6
   weight: 1
   priority: 0
 --- !u!65 &187145082
@@ -395,7 +395,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633226733}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.47, y: 2, z: -7.46}
+  m_LocalPosition: {x: 1.47, y: 2, z: -7.83}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -464,6 +464,10 @@ MonoBehaviour:
   - assemblyQualifiedName: CustomPostproSettings, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
   - assemblyQualifiedName: CustomBlurSettings, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - assemblyQualifiedName: CustomPostproVignetteSettings, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+  - assemblyQualifiedName: CustomPostproPixelateSettings, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!1 &763769265
 GameObject:
