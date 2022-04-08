@@ -1,10 +1,13 @@
 Shader "Hidden/Custom/Blur"
 {
 	HLSLINCLUDE
-		// StdLib.hlsl holds pre-configured vertex shaders (VertDefault), varying structs (VaryingsDefault), and most of the data you need to write common effects.
-#include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
-#define PI 3.14159265359
-#define E 2.71828182846
+	
+	// StdLib.hlsl holds pre-configured vertex shaders (VertDefault), varying structs (VaryingsDefault), and most of the data you need to write common effects.
+	#include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
+	
+	#define PI 3.14159265359
+	#define E 2.71828182846
+	
 	TEXTURE2D_SAMPLER2D(_MainTex, sampler_MainTex);
 
 	float _intensity;
@@ -42,27 +45,8 @@ Shader "Hidden/Custom/Blur"
 		col = col / (_quantity * 2);
 		return col;
 
-		//Parte de Gauss (aun se tiene que probar)
-		//float sum = 0;
-		//
-		//for (float index3 = 0; index3 < _quantity; index3++)
-		//{
-		//	float offset = (index3 / (_quantity - 1) - 0.5) * _intensity;
-		//
-		//	float2 uv = i.texcoord + float2(0, offset);
-		//
-		//	float stDevSquared = _StandardDeviation * _StandardDeviation;
-		//	float gauss = (1 / sqrt(2 * PI * stDevSquared)) * pow(E, -((offset * offset) / (2 * stDevSquared)));
-		//
-		//	sum += gauss;
-		//	col += SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv) * gauss;
-		//}
-		//
-		//col = col / sum;
-		//return col;
-
 	}
-		ENDHLSL
+	ENDHLSL
 
 	SubShader
 	{
