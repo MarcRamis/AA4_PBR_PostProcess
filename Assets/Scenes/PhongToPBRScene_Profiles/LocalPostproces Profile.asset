@@ -19,6 +19,28 @@ MonoBehaviour:
   blend:
     overrideState: 1
     value: 1
+--- !u!114 &-8699614157642542937
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CustomBlurSettings
+  m_EditorClassIdentifier: Assembly-CSharp::CustomBlurSettings
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  blur:
+    overrideState: 1
+    value: 0.12
+  cuantity:
+    overrideState: 1
+    value: 30
 --- !u!114 &-6563948284262343366
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -89,7 +111,45 @@ MonoBehaviour:
   m_Name: LocalPostproces Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: -4457207619340826479}
+  - {fileID: 2626341914704883512}
+--- !u!114 &106199678532069445
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: BlurSettings
+  m_EditorClassIdentifier: Assembly-CSharp::BlurSettings
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  blend:
+    overrideState: 1
+    value: 0
+--- !u!114 &2626341914704883512
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: CustomBlurSettings
+  m_EditorClassIdentifier: Assembly-CSharp::CustomBlurSettings
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  blur:
+    overrideState: 1
+    value: 0.1
 --- !u!114 &2667607901618033137
 MonoBehaviour:
   m_ObjectHideFlags: 3
