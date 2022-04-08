@@ -16,7 +16,7 @@
 	{
 		float2 coord = pow((i.texcoord * 2.0) - _framePos,1);
 		
-		float vignetteSize = pow(sqrt(dot(coord, coord)) * _size, _falloff) + 1.0; // sqrt(dot(coord,coord)) = length(coord)
+		float vignetteSize = pow(sqrt(dot(coord, coord)) * _size, _falloff) + 1.0; 
 		vignetteSize = 1.0 / pow(vignetteSize, 2);
 		
 		float4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoord);
