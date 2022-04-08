@@ -14,10 +14,10 @@ using UnityEngine.Rendering.PostProcessing;
 public sealed class CustomBlurSettings : PostProcessEffectSettings
 {
     [Range(0f, 1f), Tooltip("Blur Intensity.")]
-    public FloatParameter blur = new FloatParameter { value = 0.1f }; //Custom parameter class, full list at: /PostProcessing/Runtime/
-                                                                      //The default value is important, since is the one that will be used for blending if only 1 of volume has this effect
-    //[Range(10f, 30f), Tooltip("Blur Cuantity.")]
-    //public FloatParameter cuantity = new FloatParameter { value = 0.1f };
+    public FloatParameter blurIntensity = new FloatParameter { value = 0.1f }; //Custom parameter class, full list at: /PostProcessing/Runtime/
+                                                                               //The default value is important, since is the one that will be used for blending if only 1 of volume has this effect
+    [Range(10f, 100f), Tooltip("Blur Quantity.")]
+    public FloatParameter steps = new FloatParameter { value = 50f };
 }
 
 public class CustomBlur : PostProcessEffectRenderer<CustomBlurSettings>//<T> is the setting type
@@ -27,8 +27,8 @@ public class CustomBlur : PostProcessEffectRenderer<CustomBlurSettings>//<T> is 
         //We get the actual shader property sheet
         var sheet = context.propertySheets.Get(Shader.Find("Hidden/Custom/Blur"));
         //Set the uniform value for our shader
-        sheet.properties.SetFloat("_intensity", settings.blur);
-        //sheet.properties.SetFloat("_cuantity", settings.cuantity);
+        sheet.properties.SetFloat("_intensity", settings.blurIntensity);
+        sheet.properties.SetFloat("_quantity", settings.steps);
 
         //We render the scene as a full screen triangle applying the specified shader
         context.command.BlitFullscreenTriangle(context.source, context.destination, sheet, 0);
