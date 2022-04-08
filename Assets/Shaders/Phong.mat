@@ -74,11 +74,13 @@ Material:
     - _ZWrite: 1
     - _ambientInt: 0.248
     - _diffuseInt: 1
-    - _directionalLightIntensity: 1
-    - _fresnelIntensity: 1
-    - _geometry: 1
+    - _directionalLightIntensity: 2.73
+    - _fresnelIntensity: 0.373
+    - _geometry: 0.9
+    - _geometryCofficient: 1.3
+    - _geometryCofficientC: 10
     - _pointLightIntensity: 1
-    - _roughness: 0.042
+    - _roughness: 0.076
     - _scecularExp: 64
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
