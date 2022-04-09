@@ -12,7 +12,7 @@ public class Light : MonoBehaviour
     public float intensity;
     
     Material lightMat;
-    public Material mat;
+    public Material[] mats;
 
     // Start is called before the first frame update
     void OnEnable()
@@ -44,17 +44,21 @@ public class Light : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (type == LightType.Directional)
+        foreach(Material mat in mats)
         {
-            direction = transform.forward;
-            mat.SetVector("_directionalLightDir", -direction);
-            mat.SetColor("_directionalLightColor", color);
+            if (type == LightType.Directional)
+            {
+                direction = transform.forward;
+                mat.SetVector("_directionalLightDir", -direction);
+                mat.SetColor("_directionalLightColor", color);
+            }
+            else if (type == LightType.Point)
+            {
+                mat.SetVector("_pointLightPos", transform.position);
+                mat.SetColor("_pointLightColor", color);
+                lightMat.SetColor("_EmissionColor", color * 20 * intensity);
+            }
         }
-        else if(type == LightType.Point)
-        {
-            mat.SetVector("_pointLightPos", transform.position);
-            mat.SetColor("_pointLightColor", color);
-            lightMat.SetColor("_EmissionColor", color * 20 * intensity);
-        }
+        
     }
 }
