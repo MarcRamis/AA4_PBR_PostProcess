@@ -98,6 +98,28 @@ MonoBehaviour:
   blend:
     overrideState: 1
     value: 1
+--- !u!114 &-1439816378829463362
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: def20ebb7851cef46946e726764bbb37, type: 3}
+  m_Name: CustomBlurSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  blurIntensity:
+    overrideState: 1
+    value: 0.1
+  steps:
+    overrideState: 1
+    value: 50
 --- !u!114 &-484563287056209591
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -133,9 +155,9 @@ MonoBehaviour:
   m_Name: LocalPostproces Profile
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: -484563287056209591}
   - {fileID: 4788937105437661931}
   - {fileID: 4737483100785477973}
+  - {fileID: -1439816378829463362}
 --- !u!114 &106199678532069445
 MonoBehaviour:
   m_ObjectHideFlags: 3
