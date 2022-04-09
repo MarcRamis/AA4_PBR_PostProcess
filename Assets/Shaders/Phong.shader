@@ -117,23 +117,11 @@
 				// Fresnel Schlick
 				fresnel = _fresnelIntensity + (1 - _fresnelIntensity) * pow(1 - dot(halfVec, lightDir),5);
 
-				// Distribution Blinn
-				//distribution = (pow( (1 / (PI * _roughness)) * dot(normalize(i.worldNormal), halfVec), (2 / pow(_roughness, 2)  ) - 2));
-
 				//Distribution GGX
 				distribution = (pow(_roughness, 2)) / (PI * (pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)));
 				
 				// Geometry Implicit
 				geometry = (dot(normalize(i.worldNormal), lightDir)) * (dot(normalize(i.worldNormal), viewVec)) * _geometryCofficient;
-
-				//Geometry GGX
-				//geometry = (2 * (dot(normalize(i.worldNormal), viewVec))) / ( (dot(normalize(i.worldNormal), viewVec)) + sqrt((pow(_geometryCofficient, 2)) + (1 - (pow(_geometryCofficient, 2))) * (pow((dot(normalize(i.worldNormal), viewVec)), 2))));
-
-				// Geometry Schlick - Beckmann
-				//_sqrt = (2 / geometry);
-				//k = pow(_sqrt, 1.0 / geometry);
-				//geometry = ( (dot(normalize(i.worldNormal), viewVec) ) / ( (dot(normalize(i.worldNormal), viewVec)) * (1 - k) + k ));
-				//return geometry.xyzx;
 
 				brdfComp = (fresnel * geometry * distribution) / (4 * ( (dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec))));
 				
@@ -158,23 +146,11 @@
 				// Fresnel Schlick
 				fresnel = _fresnelIntensity + (1 - _fresnelIntensity) * pow(1 - dot(halfVec, lightDir), 5);
 
-				// Distribution Blinn
-				//distribution = (pow((1 / (PI * _roughness)) * dot(i.worldNormal, halfVec), (2 / pow(_roughness, 2)) - 2));
-
 				//Distribution GGX
 				distribution = (pow(_roughness, 2)) / (PI * (pow(pow(dot(normalize(i.worldNormal), halfVec), 2) * (pow(_roughness, 2) - 1) + 1, 2)));
 				
 				// Geometry Implicit
 				geometry = (dot(normalize(i.worldNormal),lightDir)) * (dot(normalize(i.worldNormal), viewVec)) * _geometryCofficient;
-
-				//Geometry GGX
-				//geometry = (2 * (dot(normalize(i.worldNormal), viewVec))) / ((dot(normalize(i.worldNormal), viewVec)) + sqrt((pow(_geometryCofficient, 2)) + (1 - (pow(_geometryCofficient, 2))) * (pow((dot(normalize(i.worldNormal), viewVec)), 2))));
-
-				// Geometry Schlick - Beckmann
-				//_sqrt = (2 / geometry);
-				//k = pow(_sqrt, 1.0 / geometry);
-				//geometry = ((dot(normalize(i.worldNormal), viewVec)) / ((dot(normalize(i.worldNormal), viewVec)) * (1 - k) + k));
-				//return geometry.xyzx;
 
 				// BRDF Function
 				brdfComp = (fresnel * geometry * distribution) / 4 * ((dot(i.worldNormal, lightDir)) * (dot(i.worldNormal, viewVec))) / lightDist;

@@ -113,7 +113,7 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 1
+    value: 0
   blurIntensity:
     overrideState: 1
     value: 0.1
@@ -321,7 +321,7 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   pixelSize:
     overrideState: 1
     value: 12
