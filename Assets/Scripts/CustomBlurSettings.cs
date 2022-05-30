@@ -29,7 +29,7 @@ public class CustomBlur : PostProcessEffectRenderer<CustomBlurSettings>//<T> is 
         //Set the uniform value for our shader
         sheet.properties.SetFloat("_intensity", settings.blurIntensity);
         sheet.properties.SetFloat("_quantity", settings.steps);
-        PostProcessRenderContext tempTexture = context;
+        var temporaryTexture = RenderTexture.GetTemporary(context.width, context.height);
         //Temporal texture
         //UnityEngine.Rendering.Render tempTexture = context.source;
         //RenderTexture tempTexture = new RenderTexture().RenderTexture;
@@ -39,8 +39,8 @@ public class CustomBlur : PostProcessEffectRenderer<CustomBlurSettings>//<T> is 
         //sheet2.properties.SetFloat("_quantity", settings.steps);
 
         //We render the scene as a full screen triangle applying the specified shader
-        context.command.BlitFullscreenTriangle(tempTexture.source, tempTexture.destination, sheet, 0);
-        context.source = tempTexture.destination;
-        context.command.BlitFullscreenTriangle(context.source, context.destination, sheet, 1);
+        context.command.BlitFullscreenTriangle(context.source, temporaryTexture, sheet, 0);
+        context.command.BlitFullscreenTriangle(temporaryTexture, context.destination, sheet, 1);
+        RenderTexture.ReleaseTemporary(temporaryTexture);
     }
 }
