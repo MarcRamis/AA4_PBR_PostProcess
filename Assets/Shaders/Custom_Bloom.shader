@@ -3,7 +3,7 @@ Shader "Hidden/Custom/Bloom"
 	HLSLINCLUDE
 
 		// StdLib.hlsl holds pre-configured vertex shaders (VertDefault), varying structs (VaryingsDefault), and most of the data you need to write common effects.
-#include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
+	#include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
 
 
 	TEXTURE2D_SAMPLER2D(_MainTex, sampler_MainTex);
