@@ -113,13 +113,13 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 0
+    value: 1
   blurIntensity:
     overrideState: 1
     value: 0.1
   steps:
     overrideState: 1
-    value: 50
+    value: 57.5
 --- !u!114 &-484563287056209591
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -321,7 +321,7 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 1
+    value: 0
   pixelSize:
     overrideState: 1
     value: 12
