@@ -116,10 +116,10 @@ MonoBehaviour:
     value: 1
   blurIntensity:
     overrideState: 1
-    value: 0.1
+    value: 0.229
   steps:
     overrideState: 1
-    value: 57.5
+    value: 10
 --- !u!114 &-484563287056209591
 MonoBehaviour:
   m_ObjectHideFlags: 3

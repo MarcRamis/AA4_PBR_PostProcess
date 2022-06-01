@@ -32,20 +32,36 @@ Shader "Hidden/Custom/Blur"
 			col += SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);
 		}
 		
+		// Divide the sum of values by the amount of samples
+		col = col / (_quantity);
+		return col;
+
+	}
+
+	float4 Frag2(VaryingsDefault i) : SV_Target
+	{
+		//calculate aspect ratio
+		float invAspect = _ScreenParams.y / _ScreenParams.x;
+		//init color variable
+		float4 col = 0;
+
+		// ITERATE over blur samples
+
 		// Vertical blur
 		for (float index2 = 0; index2 < _quantity; index2++)
 		{
 			// Get uv coordinate of sample
-			float2 uv = i.texcoord + float2(0, ( (index2 / (_quantity - 1) - 0.5) * _intensity * invAspect));
+			float2 uv = i.texcoord + float2(0, ((index2 / (_quantity - 1) - 0.5) * _intensity * invAspect));
 			// Add color at position to color
 			col += SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);
 		}
-		
+
 		// Divide the sum of values by the amount of samples
-		col = col / (_quantity * 2);
+		col = col / (_quantity);
 		return col;
 
 	}
+
 	ENDHLSL
 
 	SubShader
@@ -56,6 +72,13 @@ Shader "Hidden/Custom/Blur"
 			HLSLPROGRAM
 				#pragma vertex VertDefault
 				#pragma fragment Frag
+			ENDHLSL
+		}
+		Pass
+		{
+			HLSLPROGRAM
+				#pragma vertex VertDefault
+				#pragma fragment Frag2
 			ENDHLSL
 		}
 	}
