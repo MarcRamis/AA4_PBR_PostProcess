@@ -41,6 +41,28 @@ MonoBehaviour:
   steps:
     overrideState: 0
     value: 50
+--- !u!114 &-7097328209021094922
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62ca697f2ede7444e8602dfa9ff3f379, type: 3}
+  m_Name: CustomBloomSettings
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  blurIntensity:
+    overrideState: 1
+    value: 0.05
+  steps:
+    overrideState: 1
+    value: 50
 --- !u!114 &-6563948284262343366
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -113,7 +135,7 @@ MonoBehaviour:
   active: 1
   enabled:
     overrideState: 1
-    value: 1
+    value: 0
   blurIntensity:
     overrideState: 1
     value: 0.229
@@ -158,6 +180,7 @@ MonoBehaviour:
   - {fileID: 4788937105437661931}
   - {fileID: 4737483100785477973}
   - {fileID: -1439816378829463362}
+  - {fileID: -7097328209021094922}
 --- !u!114 &106199678532069445
 MonoBehaviour:
   m_ObjectHideFlags: 3
